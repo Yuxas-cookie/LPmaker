@@ -1,0 +1,209 @@
+/* ===== Panel Editor Container ===== */
+.panel-editor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* ===== Canvas Area ===== */
+.panel-editor-canvas {
+  position: relative;
+  width: 100%;
+  /* aspect-ratio is set via inline style from props */
+  background: #1a1a1e;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+
+/* Background image */
+.panel-editor-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== Grid Overlay ===== */
+.panel-editor-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.grid-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.grid-line-v {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.grid-line-h {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+/* ===== Panel ===== */
+.panel-editor-panel {
+  position: absolute;
+  z-index: 2;
+  border: solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: move;
+  transition: box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.panel-editor-panel:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.panel-editor-panel.panel-selected {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.25), inset 0 0 20px rgba(250, 204, 21, 0.04);
+  background: rgba(250, 204, 21, 0.04);
+  z-index: 3;
+}
+
+/* ===== Panel Label ===== */
+.panel-label {
+  font-size: var(--text-caption);
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  pointer-events: none;
+  padding: 4px 8px;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panel-selected .panel-label {
+  color: var(--gold);
+}
+
+.panel-label-input {
+  font-size: var(--text-caption);
+  font-family: inherit;
+  color: var(--gold);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  text-align: center;
+  outline: none;
+  max-width: 80%;
+  z-index: 10;
+}
+
+/* ===== Resize Handles ===== */
+.resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  border: 1.5px solid var(--bg-primary);
+  border-radius: 2px;
+  z-index: 5;
+}
+
+/* Corners */
+.resize-handle-nw { top: -5px; left: -5px; cursor: nwse-resize; }
+.resize-handle-ne { top: -5px; right: -5px; cursor: nesw-resize; }
+.resize-handle-se { bottom: -5px; right: -5px; cursor: nwse-resize; }
+.resize-handle-sw { bottom: -5px; left: -5px; cursor: nesw-resize; }
+
+/* Edges */
+.resize-handle-n { top: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.resize-handle-s { bottom: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.resize-handle-e { top: calc(50% - 5px); right: -5px; cursor: ew-resize; }
+.resize-handle-w { top: calc(50% - 5px); left: -5px; cursor: ew-resize; }
+
+/* ===== Empty Hint ===== */
+.panel-editor-empty-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-body);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* ===== Action Bar ===== */
+.panel-editor-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+.panel-editor-confirm {
+  padding: 10px 28px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--gold);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.panel-editor-confirm:hover:not(:disabled) {
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.3);
+}
+
+.panel-editor-confirm:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.panel-editor-cancel {
+  padding: 10px 28px;
+  font-size: var(--text-body);
+  font-weight: 500;
+  font-family: inherit;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.panel-editor-cancel:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .panel-editor-actions {
+    flex-direction: column;
+  }
+
+  .panel-editor-confirm,
+  .panel-editor-cancel {
+    width: 100%;
+    text-align: center;
+  }
+}

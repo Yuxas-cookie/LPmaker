@@ -1,0 +1,167 @@
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+.editor-toolbar-left,
+.editor-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.editor-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  font-size: var(--text-caption);
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid;
+}
+
+.editor-toolbar-btn-add {
+  background: var(--gold-muted);
+  border-color: rgba(250, 204, 21, 0.3);
+  color: var(--gold);
+}
+
+.editor-toolbar-btn-add:hover {
+  background: rgba(250, 204, 21, 0.18);
+  border-color: var(--gold);
+}
+
+.editor-toolbar-btn-delete {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.editor-toolbar-btn-delete:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: #ef4444;
+}
+
+.editor-toolbar-btn-delete:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Panel count badge */
+.editor-toolbar-count {
+  font-size: var(--text-micro);
+  color: var(--text-muted);
+  letter-spacing: var(--tracking-wide);
+  padding: 3px 8px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Toggle switch */
+.editor-toolbar-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: var(--text-micro);
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.editor-toolbar-toggle-switch {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  transition: all 0.2s ease;
+}
+
+.editor-toolbar-toggle-switch.active {
+  background: rgba(250, 204, 21, 0.15);
+  border-color: rgba(250, 204, 21, 0.4);
+}
+
+.editor-toolbar-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.editor-toolbar-toggle-switch.active .editor-toolbar-toggle-knob {
+  left: 16px;
+  background: var(--gold);
+}
+
+/* Slider */
+.editor-toolbar-slider {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.editor-toolbar-slider-label {
+  font-size: var(--text-micro);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.editor-toolbar-slider input[type="range"] {
+  width: 70px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border-default);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.editor-toolbar-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-surface);
+  cursor: pointer;
+}
+
+.editor-toolbar-slider-value {
+  font-size: var(--text-micro);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 28px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .editor-toolbar {
+    padding: var(--space-xs) var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .editor-toolbar-slider input[type="range"] {
+    width: 50px;
+  }
+}

@@ -1,0 +1,104 @@
+/* ===== Aspect Ratio Selector ===== */
+.aspect-ratio-section label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+}
+
+.aspect-ratio-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.aspect-ratio-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  font-family: inherit;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 72px;
+}
+
+.aspect-ratio-button:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.aspect-ratio-button.selected {
+  border-color: var(--gold);
+  background: var(--gold-muted);
+  color: var(--gold);
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.1);
+}
+
+.ratio-preview-box {
+  width: 32px;
+  max-height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+.ratio-label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+}
+
+.ratio-desc {
+  font-size: var(--text-micro);
+  opacity: 0.6;
+}
+
+/* ===== Custom Size Inputs ===== */
+.custom-size-inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  animation: fadeInUp 0.3s ease both;
+}
+
+.size-input-group {
+  flex: 1;
+}
+
+.size-input-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--text-micro) !important;
+  color: var(--text-muted) !important;
+  font-weight: 500 !important;
+}
+
+.size-input {
+  width: 100%;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.size-separator {
+  font-size: var(--text-body);
+  color: var(--text-muted);
+  padding-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .aspect-ratio-options {
+    flex-wrap: wrap;
+  }
+
+  .aspect-ratio-button {
+    flex: 1;
+    min-width: calc(33% - 6px);
+  }
+}
