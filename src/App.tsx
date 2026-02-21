@@ -171,7 +171,11 @@ function App() {
   const handleReset = useCallback(() => {
     generation.resetToNew()
     clearHistory()
-  }, [generation, clearHistory])
+    layoutGeneration.resetLayouts()
+    panelEditor.reset()
+    qualityReport.closeDrawer()
+    // プロンプト・テンプレート・アスペクト比・スタイル・アップロード画像はすべて保持
+  }, [generation, clearHistory, layoutGeneration, panelEditor, qualityReport])
 
   const handleDropProduct = useCallback((e: React.DragEvent) => {
     imageUpload.handleDrop(e, imageUpload.setProductImages, imageUpload.setIsDraggingProduct)
