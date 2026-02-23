@@ -9,11 +9,19 @@ type Props = {
   onInputChange: (value: string) => void
   onSend: (message: string) => void
   onApplySuggestion: (suggestion: string) => void
+  applySuggestionLabel?: string
+  emptyMessage?: string
+  placeholder?: string
+  suggestionMarkerPattern?: RegExp
 }
 
 export function ChatInterface({
   messages, isLoading, inputValue,
   onInputChange, onSend, onApplySuggestion,
+  applySuggestionLabel = '編集に適用',
+  emptyMessage = 'クイック質問を選択するか、自由に質問してください',
+  placeholder = '質問を入力...',
+  suggestionMarkerPattern = /【編集提案】[\s\S]*?【\/編集提案】/g,
 }: Props) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -40,7 +48,7 @@ export function ChatInterface({
 
   // Strip suggestion markers for display
   const formatContent = (content: string) => {
-    return content.replace(/【編集提案】[\s\S]*?【\/編集提案】/g, '').trim()
+    return content.replace(suggestionMarkerPattern, '').trim()
   }
 
   return (
@@ -48,7 +56,7 @@ export function ChatInterface({
       <div className="chat-messages">
         {messages.length === 0 && !isLoading && (
           <div className="chat-empty">
-            <p>クイック質問を選択するか、自由に質問してください</p>
+            <p>{emptyMessage}</p>
           </div>
         )}
 
@@ -68,7 +76,7 @@ export function ChatInterface({
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 7h7M9 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                編集に適用
+                {applySuggestionLabel}
               </button>
             )}
           </div>
@@ -95,7 +103,7 @@ export function ChatInterface({
           value={inputValue}
           onChange={e => onInputChange(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="質問を入力..."
+          placeholder={placeholder}
           rows={1}
           disabled={isLoading}
         />

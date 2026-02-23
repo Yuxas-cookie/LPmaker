@@ -10,6 +10,7 @@ import { useImageUpload } from '@/hooks/useImageUpload'
 import { useEditHistory } from '@/hooks/useEditHistory'
 import { useImageGeneration } from '@/hooks/useImageGeneration'
 import { useQualityReport } from '@/hooks/useQualityReport'
+import { useBrainstorm } from '@/hooks/useBrainstorm'
 import { useLayoutGeneration } from '@/hooks/useLayoutGeneration'
 import { usePanelEditor } from '@/hooks/usePanelEditor'
 import { dataUrlToBase64 } from '@/services/imageUtils'
@@ -72,6 +73,16 @@ function App() {
   })
 
   const panelEditor = usePanelEditor()
+
+  const brainstorm = useBrainstorm({
+    apiKey,
+    selectedModel,
+  })
+
+  const handleApplyBrainstormPrompt = useCallback((promptText: string) => {
+    setPrompt(promptText)
+    setSelectedTemplate(null)
+  }, [])
 
   const handleApplyToEdit = useCallback((suggestion: string) => {
     generation.setEditPrompt(suggestion)
@@ -221,6 +232,14 @@ function App() {
           setIsDraggingReference={imageUpload.setIsDraggingReference}
           selectedTemplate={selectedTemplate}
           onTemplateSelect={handleTemplateSelect}
+          brainstormMessages={brainstorm.messages}
+          isBrainstormLoading={brainstorm.isLoading}
+          brainstormChatInput={brainstorm.chatInput}
+          brainstormError={brainstorm.error}
+          onBrainstormChatInputChange={brainstorm.setChatInput}
+          onBrainstormSend={brainstorm.sendMessage}
+          onBrainstormClear={brainstorm.clearChat}
+          onApplyBrainstormPrompt={handleApplyBrainstormPrompt}
           prompt={prompt}
           onPromptChange={setPrompt}
           onManualPromptEdit={handleManualPromptEdit}

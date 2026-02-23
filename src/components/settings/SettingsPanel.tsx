@@ -1,12 +1,13 @@
 import { type DragEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import type { UploadedImage, PromptTemplate, AspectRatioOption, StylePreset, HistoryItem } from '@/types'
+import type { UploadedImage, PromptTemplate, AspectRatioOption, StylePreset, HistoryItem, ChatMessage } from '@/types'
 import { EDIT_SUGGESTIONS } from '@/constants/editSuggestions'
 import { ApiKeySection } from './ApiKeySection'
 import { ModelSelector } from './ModelSelector'
 import { SystemPromptEditor } from './SystemPromptEditor'
 import { ImageUploader } from './ImageUploader'
 import { TemplateSelector } from './TemplateSelector'
+import { BrainstormChat } from './BrainstormChat'
 import { PromptEditor } from './PromptEditor'
 import { AspectRatioSelector } from './AspectRatioSelector'
 import { StylePresetSelector } from './StylePresetSelector'
@@ -49,6 +50,15 @@ type Props = {
   // Template
   selectedTemplate: PromptTemplate | null
   onTemplateSelect: (template: PromptTemplate) => void
+  // Brainstorm
+  brainstormMessages: ChatMessage[]
+  isBrainstormLoading: boolean
+  brainstormChatInput: string
+  brainstormError: string | null
+  onBrainstormChatInputChange: (value: string) => void
+  onBrainstormSend: (message: string) => void
+  onBrainstormClear: () => void
+  onApplyBrainstormPrompt: (prompt: string) => void
   // Prompt
   prompt: string
   onPromptChange: (v: string) => void
@@ -92,6 +102,8 @@ export function SettingsPanel(props: Props) {
     onDropProduct, onDropReference,
     setIsDraggingProduct, setIsDraggingReference,
     selectedTemplate, onTemplateSelect,
+    brainstormMessages, isBrainstormLoading, brainstormChatInput, brainstormError,
+    onBrainstormChatInputChange, onBrainstormSend, onBrainstormClear, onApplyBrainstormPrompt,
     prompt, onPromptChange, onManualPromptEdit,
     selectedAspectRatio, customWidth, customHeight,
     onAspectRatioChange, onCustomWidthChange, onCustomHeightChange,
@@ -149,6 +161,17 @@ export function SettingsPanel(props: Props) {
       <TemplateSelector
         selectedTemplate={selectedTemplate}
         onTemplateSelect={onTemplateSelect}
+      />
+      <BrainstormChat
+        apiKey={apiKey}
+        messages={brainstormMessages}
+        isLoading={isBrainstormLoading}
+        chatInput={brainstormChatInput}
+        error={brainstormError}
+        onChatInputChange={onBrainstormChatInputChange}
+        onSend={onBrainstormSend}
+        onClearChat={onBrainstormClear}
+        onApplyPrompt={onApplyBrainstormPrompt}
       />
       <AspectRatioSelector
         selectedRatio={selectedAspectRatio}
