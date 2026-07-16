@@ -1,5 +1,16 @@
 # スコアリング履歴
 
+## 2026-07-16 Session 8 | Merchandising-tool | Claude in ChromeでセラーセントラルAPI全件取得
+
+| 軸 | 値 |
+|----|-----|
+| A1 | +1 | A2 | +1 | A3 | 0 | A4 | 0 | A5 | -1 |
+| B1 | -2 | B2 | -2 | B3 | -1 |
+| C1 | - | C2 | 3 | C3 | - | C4 | - |
+| D1 | 3 | D2 | 3 | D3 | - |
+
+---
+
 ## 2026-07-15 Session 3 | Merchandising-tool | quickshop_scraperパッケージ新規実装
 
 | 軸 | 値 |
