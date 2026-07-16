@@ -22,6 +22,17 @@
 
 ---
 
+## 2026-07-16 Session 7 | Merchandising-tool | scrape_seller_approval Playwright対応
+
+| 軸 | 値 |
+|----|-----|
+| A1 | +1 | A2 | +1 | A3 | 0 | A4 | 0 | A5 | -1 |
+| B1 | -1 | B2 | -1 | B3 | -1 |
+| C1 | 3 | C2 | 3 | C3 | - | C4 | 3 |
+| D1 | 3 | D2 | 3 | D3 | 2 |
+
+---
+
 ## 2026-07-16 Session 5 | Merchandising-tool | ブランド名自動取得スクリプト完成・実行
 
 | 軸 | 値 |
